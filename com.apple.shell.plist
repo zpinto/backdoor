@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.apple.shell.plist</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python</string>
+        <string>/Users/<username>/<dir_of_shell>/shell.py</string>
+    </array>
+    <key>StandardErrorPath</key>
+    <string>/Users/<username>/<dir_of_shell>/s/shell.error</string>
+    <key>KeepAlive</key>
+    <true/>
+</dict>
+</plist>
