@@ -1,1 +1,1 @@
-python -m pip install cryptography
+pip3 install cryptography

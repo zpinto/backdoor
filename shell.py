@@ -25,7 +25,9 @@ def login():
     send("Login: ")
     pwd = recv(20000)
     if pwd.strip() == CONFIG.pwd:
+        send("Successful Login")
         return True
+    send("Wrong Password")
     return False
 
 

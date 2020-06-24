@@ -6,11 +6,11 @@
     <string>com.apple.shell.plist</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/bin/python</string>
+        <string>/usr/local/bin/python3</string>
         <string>/Users/<username>/<dir_of_shell>/shell.py</string>
     </array>
     <key>StandardErrorPath</key>
-    <string>/Users/<username>/<dir_of_shell>/s/shell.error</string>
+    <string>/Users/<username>/<dir_of_shell>/shell.error</string>
     <key>KeepAlive</key>
     <true/>
 </dict>
