@@ -1,2 +1,6 @@
+.vscode
 __pycache__
 config.py
+env
+*.key
+com.apple.shell.plist

